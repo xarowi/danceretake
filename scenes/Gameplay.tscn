@@ -1,0 +1,212 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/gameplay_main_script.gd" type="Script" id=1]
+[ext_resource path="res://textures/pictobar/pictobar_color_mask.png" type="Texture" id=2]
+[ext_resource path="res://textures/pictobar/pictobar_base.png" type="Texture" id=3]
+[ext_resource path="res://scripts/pictobar_script.gd" type="Script" id=4]
+[ext_resource path="res://fonts/HelveticaNeueLTPro65Md.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PictobarBeat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -119, 165 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PictobarBeat:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Gradient:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -119, 165 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Gradient:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2.15625, 26 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "beat_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("PictobarBeat:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, 166 ), Vector2( -111.5, 166 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PictobarBeat:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.910563, 0.722222 ), Vector2( 0.795774, 0.722222 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Gradient:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -111, 166 ), Vector2( -111, 166 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Gradient:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.9375, 18.7778 ), Vector2( 1.75, 18.7778 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "picto_anim"
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 1, 0, 0, 1, 0.660156, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+width = 64
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 5 )
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pictobar" type="Node2D" parent="."]
+position = Vector2( 1007, 513 )
+script = ExtResource( 4 )
+
+[node name="PictobarAnim" type="AnimationPlayer" parent="Pictobar"]
+anims/RESET = SubResource( 1 )
+anims/beat_animation = SubResource( 2 )
+anims/picto_anim = SubResource( 3 )
+
+[node name="PictobarBase" type="Sprite" parent="Pictobar"]
+position = Vector2( 411, 167 )
+scale = Vector2( 0.80531, 0.611111 )
+texture = ExtResource( 3 )
+
+[node name="Gradient" type="Sprite" parent="Pictobar"]
+light_mask = 32
+position = Vector2( -119, 165 )
+scale = Vector2( 2.15625, 26 )
+texture = SubResource( 5 )
+
+[node name="PictobarBeat" type="Light2D" parent="Pictobar"]
+position = Vector2( -119, 165 )
+texture = ExtResource( 2 )
+mode = 3
+range_item_cull_mask = 32
+
+[node name="Pictos" type="Node2D" parent="."]
+
+[node name="Lyrics" type="Node2D" parent="."]
+
+[node name="CurrentLineBkg" type="RichTextLabel" parent="Lyrics"]
+margin_left = 35.0
+margin_top = 645.0
+margin_right = 746.0
+margin_bottom = 666.0
+custom_fonts/normal_font = SubResource( 6 )
+tab_size = 0
+text = "Placeholder lyric can be SOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO LONG!"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentLineColor" type="RichTextLabel" parent="Lyrics"]
+margin_left = 35.0
+margin_top = 645.0
+margin_right = 745.0
+margin_bottom = 666.0
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 8 )
+visible_characters = 0
+percent_visible = 0.0
+text = "Placeholder lyric can be SOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO LONG!"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLineBkg" type="RichTextLabel" parent="Lyrics"]
+modulate = Color( 1, 1, 1, 0.501961 )
+margin_left = 35.0
+margin_top = 665.0
+margin_right = 745.0
+margin_bottom = 686.0
+custom_fonts/normal_font = SubResource( 7 )
+text = "Placeholder lyric can be SOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO LONG!"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LyricsAnimation" type="Tween" parent="Lyrics"]
